@@ -20,7 +20,7 @@ public class Spiral {
 
 		System.out.println( "centerX: "+centerX+", centerY: "+centerY);
 		buffer[centerX][centerY] = 0;
-		ClockwiseDirection dir = ClockwiseDirection.Right;
+		ClockwiseDirection dir = ClockwiseDirection.Up;
 		Integer x = centerX;
 		Integer y = centerY;
 		Integer counter = 1;
@@ -60,7 +60,7 @@ public class Spiral {
 		for( int x = 0; x < buffer.length; x++){
 			for( int y = 0; y <buffer.length; y++){
 
-				sb.append(buffer[y][x] + "\t");
+				sb.append(buffer[x][y] + "\t");
 			}
 			sb.append("\n");
 		}

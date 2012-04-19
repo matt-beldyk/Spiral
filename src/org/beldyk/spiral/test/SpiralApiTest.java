@@ -65,7 +65,7 @@ public class SpiralApiTest {
 	}
 	
 	@Test public void populateBuffer() {
-		SpiralInternalsTester spiral = new SpiralInternalsTester(8);
+		SpiralInternalsTester spiral = new SpiralInternalsTester(24);
 		spiral.populateBuffer();
 	}
 }
