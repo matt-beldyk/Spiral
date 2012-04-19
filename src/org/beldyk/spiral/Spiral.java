@@ -1,9 +1,12 @@
 package org.beldyk.spiral;
 
 public class Spiral {
-	protected Integer topValue;
+	protected final Integer topValue;
 	protected Integer[][] buffer;
+	protected Boolean haveAlreadyPopulated;
 
+
+	//  Directions to remember our logic of working around the spiral
 	public enum ClockwiseDirection{
 		Right, Down, Left, Up;
 	}
@@ -11,20 +14,46 @@ public class Spiral {
 
 	public Spiral(Integer num){
 		topValue = num;
+		this.haveAlreadyPopulated = false;
+		this.checkSanity();
+		
 		buffer = allocateBuffer(topValue);
 		this.populateBuffer();
+		this.haveAlreadyPopulated = true;
 	}
+
+	/**
+	 * This code makes sure that the input to this class is sane before attempting to do work
+	 * 
+	 */
+	protected void checkSanity(){
+		if (topValue < 0){
+			throw new RuntimeException("Negative input value results undefined");
+		}
+	}
+
 	@Override public String toString(){
 		return this.bufferToString();
 	}
 
+	/**
+	 * This function will fill the pre-allocated buffer with a spiral of numbers
+	 */
 	protected void populateBuffer(){
+
+		if( this.haveAlreadyPopulated){
+			throw new RuntimeException("Cannot reuse object to repopulate a new buffer");
+		}
+
+		//  Find the center of the buffer
 		Integer centerX = buffer.length/2;
 		Integer centerY = buffer.length/2;
 
+		// Start our counting at zero as in the example
 		buffer[centerX][centerY] = 0;
 
-		// Yes, row major/minor order looks mixed up here TODO fix it
+		// Yes, row major/minor order looks mixed up here (Just imagine you are laying on your right 
+		// side looking at the buffer )
 		ClockwiseDirection dir = ClockwiseDirection.Up;
 		Integer x = centerX;
 		Integer y = centerY;
@@ -60,6 +89,14 @@ public class Spiral {
 		}
 
 	}
+
+	/**
+	 * translates the buffer into a pretty printed String ified
+	 * spiral.  This adds the minimal amount of white space padding it
+	 * can get away with
+	 * 
+	 * @return
+	 */
 	protected String bufferToString(){
 		StringBuilder sb = new StringBuilder();
 		for( int x = 0; x < buffer.length; x++){
@@ -79,7 +116,19 @@ public class Spiral {
 		}
 		return sb.toString();
 	}
+
+	/**
+	 * allocates a buffer that will eventually be filled with a spiral of numbers
+	 * 
+	 * @param maxVal
+	 * @return
+	 */
 	protected Integer [][] allocateBuffer(Integer maxVal){
+
+		if( this.haveAlreadyPopulated){
+			throw new RuntimeException("Cannot reuse object to repopulate a new buffer");
+		}
+
 		//1, 9, 25, 49... odd numbers squared
 		Integer counter = 1;
 		//TODO make this faster (ie ceil(sqrt(maxVal+1)) then be odd
