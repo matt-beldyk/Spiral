@@ -50,6 +50,17 @@ public class SpiralApiTest {
 		Integer [][] buffer = spiral.allocateBuffer(0);
 		assertEquals(1, buffer.length);
 		assertEquals(1, buffer[0].length);
-		
+	}
+	@Test public void allocateBuffer1() {
+		SpiralInternalsTester spiral = new SpiralInternalsTester(1);
+		Integer [][] buffer = spiral.allocateBuffer(1);
+		assertEquals(3, buffer.length);
+		assertEquals(3, buffer[0].length);
+	}
+	@Test public void allocateBuffer24() {
+		SpiralInternalsTester spiral = new SpiralInternalsTester(24);
+		Integer [][] buffer = spiral.allocateBuffer(24);
+		assertEquals(5, buffer.length);
+		assertEquals(5, buffer[0].length);
 	}
 }
