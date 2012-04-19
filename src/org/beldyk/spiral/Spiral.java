@@ -92,9 +92,20 @@ public class Spiral {
 		return buffer;
 	}
 
+	/**
+	 * Returns a string that is left space padded based on the biggest value
+	 * this particular spiral will see
+	 * 
+	 * @param num
+	 * @return
+	 */
 	protected String padInt(Integer num){
 		Integer paddingWidth = this.topValue.toString().length();
-		return String.format("%"+paddingWidth+"s", num);
+		if ( num == null){
+			return String.format("%"+paddingWidth+"s", ""); 
+		} else {
+			return String.format("%"+paddingWidth+"s", num);
+		}
 	}
 
 

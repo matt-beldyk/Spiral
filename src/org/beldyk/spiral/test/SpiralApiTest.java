@@ -33,6 +33,19 @@ public class SpiralApiTest {
 
 	}
 	
+	@Test public void spiral23() {
+		Spiral spiral = new Spiral(23);
+		String targetResult = 
+				"20 21 22 23   \n" +
+				"19  6  7  8  9\n"+
+				"18  5  0  1 10\n"+
+				"17  4  3  2 11\n"+
+				"16 15 14 13 12";
+		String resultFromCode = spiral.toString();
+		assertEquals(targetResult, resultFromCode);
+
+	}
+	
 	@Test public void zeroCase() {
 		Spiral spiral = new Spiral(0);
 		String targetResult = "0";
