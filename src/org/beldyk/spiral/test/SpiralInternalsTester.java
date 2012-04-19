@@ -13,5 +13,10 @@ public class SpiralInternalsTester extends Spiral {
 		return super.allocateBuffer(maxVal);
 	}
 	
+	@Override
+	public void populateBuffer(){
+		super.populateBuffer();
+	}
+	
 
 }
