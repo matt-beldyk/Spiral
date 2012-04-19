@@ -12,14 +12,19 @@ public class Spiral {
 	public Spiral(Integer num){
 		topValue = num;
 		buffer = allocateBuffer(topValue);
+		this.populateBuffer();
+	}
+	@Override public String toString(){
+		return this.bufferToString();
 	}
 
 	protected void populateBuffer(){
 		Integer centerX = buffer.length/2;
 		Integer centerY = buffer.length/2;
 
-		System.out.println( "centerX: "+centerX+", centerY: "+centerY);
 		buffer[centerX][centerY] = 0;
+
+		// Yes, row major/minor order looks mixed up here TODO fix it
 		ClockwiseDirection dir = ClockwiseDirection.Up;
 		Integer x = centerX;
 		Integer y = centerY;
@@ -51,18 +56,26 @@ public class Spiral {
 
 			buffer[x][y] = counter;
 			counter += 1;
-			System.out.println( unpaddedBufferToString());
+			//System.out.println( bufferToString());
 		}
 
 	}
-	protected String unpaddedBufferToString(){
+	protected String bufferToString(){
 		StringBuilder sb = new StringBuilder();
 		for( int x = 0; x < buffer.length; x++){
 			for( int y = 0; y <buffer.length; y++){
 
-				sb.append(buffer[x][y] + "\t");
+				sb.append(padInt(buffer[x][y]));
+
+				// no extra spaces at the end of the line
+				if(y < buffer.length - 1){
+					sb.append(" ");
+				}
 			}
-			sb.append("\n");
+			// no extra new line at the end of the output
+			if (x < buffer.length - 1){
+				sb.append("\n");
+			}
 		}
 		return sb.toString();
 	}
@@ -79,10 +92,11 @@ public class Spiral {
 		return buffer;
 	}
 
-
-	public String toString(){
-		return null;
+	protected String padInt(Integer num){
+		Integer paddingWidth = this.topValue.toString().length();
+		return String.format("%"+paddingWidth+"s", num);
 	}
+
 
 
 }

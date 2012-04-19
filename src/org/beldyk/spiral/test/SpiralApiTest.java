@@ -19,18 +19,14 @@ public class SpiralApiTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
 
 	@Test public void exampleFromAssignemnt() {
 		Spiral spiral = new Spiral(24);
 		String targetResult = 
-				"20 21 21 23 24" +
-				"19  6  7  8  9"+
-				"18  5  0  1 10"+
-				"17  4  3  2 11"+
+				"20 21 22 23 24\n" +
+				"19  6  7  8  9\n"+
+				"18  5  0  1 10\n"+
+				"17  4  3  2 11\n"+
 				"16 15 14 13 12";
 		String resultFromCode = spiral.toString();
 		assertEquals(targetResult, resultFromCode);
@@ -64,8 +60,4 @@ public class SpiralApiTest {
 		assertEquals(5, buffer[0].length);
 	}
 	
-	@Test public void populateBuffer() {
-		SpiralInternalsTester spiral = new SpiralInternalsTester(24);
-		spiral.populateBuffer();
-	}
 }
